@@ -3,4 +3,5 @@ data/fhir
 synthea-source
 data/symptoms
 .DS_Store
+synthea-with-dependencies.jar
 
