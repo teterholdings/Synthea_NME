@@ -127,14 +127,14 @@ done < $PROJECT_ROOT/data/STATES.txt
 The analysis script uses R, but for this project we have used Docker in order to minimize dependencies that must be installed locally.
 
 ```bash
-docker build -t mapper $PROJECT_ROOT/mapper
+docker build -t nme_analysis $PROJECT_ROOT/analysis
 
 docker run --rm -v $PROJECT_ROOT/data:/data \
     -v $PROJECT_ROOT/plots:/output \
-    mapper
+    nme_analysis
 ```
 
 ### Analyze results
 
-The Docker `mapper` executable uses R to create interactive maps, bar plots, and scatter/regression plots for validation and analysis.  Per the project paper, small populations of records do represent the low density occurrences of NMEs and measles infections well.
+The Docker `nme_analysis` executable uses R to create interactive maps, bar plots, and scatter/regression plots for validation and analysis.  Per the project paper, small populations of records do represent the low density occurrences of NMEs and measles infections well.
 
