@@ -96,7 +96,7 @@ Change into the Synthea source folder and use gradle to build the jarfile with d
 
 ```bash
 cd synthea-source
-./gradle build uberJar
+./gradlew build uberJar
 cp build/libs/synthea-with-dependencies.jar $PROJECT_ROOT/
 cd ..
 ```
