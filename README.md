@@ -24,7 +24,7 @@ We also use open source software to develop some analytic tools that investigate
 
 ## Requirements
 
-1. Synthea developer requirements (access to Synthea source code, java compiler, gradle, etc.)  See (Synthea Developer Setup)[https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running].
+1. Synthea developer requirements (access to Synthea source code, java compiler, gradle, etc.)  See [Synthea Developer Setup](https://github.com/synthetichealth/synthea/wiki/Developer-Setup-and-Running).
 1. Python 3 and python virtual environment.
 1. Docker installed and running.
 
