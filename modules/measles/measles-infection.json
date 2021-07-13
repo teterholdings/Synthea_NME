@@ -1,0 +1,240 @@
+{
+  "name": "Measles_Module",
+  "remarks": [
+    "Measles Module using data from CDC Website:",
+    "",
+    "https://www.cdc.gov/measles/symptoms/signs-symptoms.html",
+    "",
+    ""
+  ],
+  "states": {
+    "Initial": {
+      "type": "Initial",
+      "direct_transition": "Potential_Onset"
+    },
+    "Terminal": {
+      "type": "Terminal"
+    },
+    "Potential_Onset": {
+      "type": "Delay",
+      "remarks": [
+        "Measles is a very contagious disease caused by a virus. It spreads through the air when an infected person coughs or sneezes. Measles starts with a cough, runny nose, red eyes, and fever. Then a rash of tiny, red spots breaks out. It starts at the head and spreads to the rest of the body.",
+        "",
+        "Measles can be prevented with MMR vaccine. The vaccine protects against three diseases: measles, mumps, and rubella. CDC recommends children get two doses of MMR vaccine, starting with the first dose at 12 through 15 months of age, and the second dose at 4 through 6 years of age. Teens and adults should also be up to date on their MMR vaccination.",
+        "",
+        "The MMR vaccine is very safe and effective. Two doses of MMR vaccine are about 97% effective at preventing measles; one dose is about 93% effective.",
+        "",
+        "See CDC Website: https://www.cdc.gov/vaccines/vpd/measles/"
+      ],
+      "direct_transition": "Measles_Infection",
+      "range": {
+        "low": 7,
+        "high": 14,
+        "unit": "days"
+      }
+    },
+    "Measles_Infection": {
+      "type": "ConditionOnset",
+      "assign_to_attribute": "Measles Contracted",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14189004,
+          "display": "Measles (disorder)"
+        }
+      ],
+      "direct_transition": "Measles"
+    },
+    "Common_Symptom1": {
+      "type": "Symptom",
+      "symptom": "Fever",
+      "cause": "",
+      "probability": 1,
+      "distribution": {
+        "kind": "GAUSSIAN",
+        "parameters": {
+          "mean": 50,
+          "standardDeviation": 3
+        }
+      },
+      "direct_transition": "Common_Symptom2",
+      "remarks": [
+        "severity"
+      ]
+    },
+    "Common_Symptom3": {
+      "type": "Symptom",
+      "symptom": "Runny Nose",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "direct_transition": "Common_Symptom4"
+    },
+    "Common_Symptom2": {
+      "type": "Symptom",
+      "symptom": "Cough",
+      "direct_transition": "Common_Symptom3",
+      "range": {
+        "low": 1,
+        "high": 99
+      }
+    },
+    "Common_Symptom4": {
+      "type": "Symptom",
+      "symptom": "Inflammed Eyes",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "direct_transition": "Common_Symptom5"
+    },
+    "Common_Symptom5": {
+      "type": "Symptom",
+      "symptom": "Soar Throat",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "direct_transition": "Common_Symptom6"
+    },
+    "Common_Symptom6": {
+      "type": "Symptom",
+      "symptom": "Rash",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "direct_transition": "Common_Symptom7"
+    },
+    "Common_Symptom7": {
+      "type": "Symptom",
+      "symptom": "Diarrhia",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "probability": 0.1,
+      "conditional_transition": [
+        {
+          "transition": "Common_Symptom8",
+          "condition": {
+            "condition_type": "Age",
+            "operator": "<=",
+            "quantity": 5,
+            "unit": "years",
+            "value": 0
+          }
+        },
+        {
+          "transition": "Measles_End",
+          "condition": {
+            "condition_type": "Age",
+            "operator": ">",
+            "quantity": 5,
+            "unit": "years"
+          }
+        }
+      ]
+    },
+    "Common_Symptom8": {
+      "type": "Symptom",
+      "symptom": "Ear Infection",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "probability": 0.1,
+      "direct_transition": "Common_Symptom9"
+    },
+    "Hospitalization": {
+      "type": "Encounter",
+      "direct_transition": "Discharged",
+      "reason": "Measles",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14189004,
+          "display": "Measles (disorder)",
+          "value_set": "Measles"
+        }
+      ],
+      "encounter_class": "inpatient"
+    },
+    "Common_Symptom9": {
+      "type": "Symptom",
+      "symptom": "Pneumonia",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "probability": 0.05,
+      "direct_transition": "Common_Symptom10"
+    },
+    "Child_Death": {
+      "type": "Death",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14189004,
+          "display": "Measles"
+        }
+      ],
+      "direct_transition": "Measles_End"
+    },
+    "Common_Symptom10": {
+      "type": "Symptom",
+      "symptom": "Ecephalitis",
+      "range": {
+        "low": 1,
+        "high": 99
+      },
+      "probability": 0.01,
+      "cause": "",
+      "distributed_transition": [
+        {
+          "transition": "Measles_End",
+          "distribution": 0.999
+        },
+        {
+          "transition": "Child_Death",
+          "distribution": {
+            "attribute": "attribute",
+            "default": 0.001
+          }
+        }
+      ]
+    },
+    "Discharged": {
+      "type": "EncounterEnd",
+      "direct_transition": "Common_Symptom1"
+    },
+    "Measles_End": {
+      "type": "EncounterEnd",
+      "direct_transition": "Terminal"
+    },
+    "Measles": {
+      "type": "Encounter",
+      "encounter_class": "ambulatory",
+      "reason": "Measles_Infection",
+      "codes": [
+        {
+          "system": "SNOMED-CT",
+          "code": 14189004,
+          "display": "Measles (disorder)"
+        }
+      ],
+      "distributed_transition": [
+        {
+          "transition": "Hospitalization",
+          "distribution": 0.2
+        },
+        {
+          "transition": "Common_Symptom1",
+          "distribution": 0.8
+        }
+      ]
+    }
+  },
+  "gmf_version": 2
+}

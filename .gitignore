@@ -1,0 +1,6 @@
+env
+data/fhir
+synthea-source
+data/symptoms
+.DS_Store
+
