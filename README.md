@@ -61,19 +61,26 @@ fi
 
 ### Modify `Immunizations.java` module
 
-For simplicity, we'll use `sed` to replace the line
+For simplicity, we'll use `sed`.  The only change is to replace this line in `synthea-source/src/main/java/org/mitre/synthea/modules/Immunizations.java`:
 ```
     if (series > 0) {
 ```
-with the line
+with the following text:
 ```
     if ((series > 0) && !person.attributes.containsKey(immunization + " NME")) {
 ```
 
-If the command below does not work, you can make the line replacement in `Immunizations.java` manually.
+If neither command below works, you can make the line replacement shown above in the `Immunizations.java` file manually.
 ```bash
+# Linux command
 sed -i 's/if (series > 0) {/if ((series > 0) \&\& \!person\.attributes\.containsKey(immunization + " NME")) {/g' synthea-source/src/main/java/org/mitre/synthea/modules/Immunizations.java
 ```
+
+```bash
+# MacOS command
+sed -i "" 's/if (series > 0) {/if ((series > 0) \&\& \!person\.attributes\.containsKey(immunization + " NME")) {/g' synthea-source/src/main/java/org/mitre/synthea/modules/Immunizations.java
+```
+
 
 ### Copy measles module and measles-infection submodule into source code
 
