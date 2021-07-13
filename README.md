@@ -9,7 +9,7 @@ Recent trends have shown an increase in the number of parents that request non-m
 
 For this effort, we modify the existing immunization workflow in Synthea so that it accounts for patient preferences and produces synthetic health records (or synthetic patients) with a more varied vaccination history, specifically with respect to the Measles, Mumps, and Rubella (MMR) vaccine.  We demonstrate the utility of this modification by developing a prototype module for childhood measles that is responsive to whether the patient has received the MMR vaccination.  To validate the results, we use linear regression compare the synthetic data produced to existing public vaccination estimates.  Finally, we comment on how this development enhances the capability of Synthea and propose multiple avenues for future research efforts that, using this capability, could have significant impacts on public health and facilitate Patient Centered Outcomes Research (PCOR).
 
-More information is contained in our project report, located in this repository at `write-up/submission.pdf`.  Also check out our [YouTube video](https://youtu.be/UcGUMbfxzWs).
+More information is contained in our project report, located in this repository at `write-up/submission.pdf`.  Also check out our [YouTube video](https://www.youtube.com/watch?v=BVlPj1qW75w).
 
 # What this code does
 
