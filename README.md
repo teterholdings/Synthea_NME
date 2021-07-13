@@ -134,8 +134,8 @@ done < $PROJECT_ROOT/data/STATES.txt
 The analysis script uses R, but for this project we have used Docker in order to minimize dependencies that must be installed locally.
 
 ```bash
+mkdir -p plots
 docker build -t nme_analysis $PROJECT_ROOT/analysis
-
 docker run --rm -v $PROJECT_ROOT/data:/data \
     -v $PROJECT_ROOT/plots:/output \
     nme_analysis
