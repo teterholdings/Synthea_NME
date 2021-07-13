@@ -70,9 +70,9 @@ with the line
     if ((series > 0) && !person.attributes.containsKey(immunization + " NME")) {
 ```
 
-
+If the command below does not work, you can make the line replacement in `Immunizations.java` manually.
 ```bash
-sed -i 's/if (series > 0) {/if ((series > 0) \&\& \!person\.attributes\.containsKey(immunization + " NME")) {/g' synthea-bin/src/main/java/org/mitre/synthea/modules/Immunizations.java
+sed -i 's/if (series > 0) {/if ((series > 0) \&\& \!person\.attributes\.containsKey(immunization + " NME")) {/g' synthea-source/src/main/java/org/mitre/synthea/modules/Immunizations.java
 ```
 
 ### Copy measles module and measles-infection submodule into source code
