@@ -110,7 +110,7 @@ cd ..
 
 ### Run Synthea to generate records for all states
 
-Generate `$RECORD_COUNT` (50 in below script) records and save to `data/` folder.  Age range is set for 6-30 years old to capture the target NME demographic.
+Generate `$RECORD_COUNT` (50 in below script) records and save to `data/` folder.  Age range is set for 6-30 years old to capture the target NME demographic.  As discussed in our report (`write-up/submission.pdf`), for useful results we need to generate thousands of records per state.  We use 50 here for demonstration purposes.
 
 ```bash
 export RECORD_COUNT=50
